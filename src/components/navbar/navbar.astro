@@ -2,6 +2,7 @@
 import Container from "@components/container.astro";
 import Link from "@components/ui/link.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import { defaultLang } from "i18n/ui";
 import { getLangFromUrl , useTranslations, useTranslatedPath } from '../../i18n/utils'
 import LanguagePicker from "@components/languagePicker.astro";
 
@@ -22,7 +23,7 @@ const menuitems = [
   // },
     {
       title: t('nav.app_news'),
-      path:translatePath('/' + lang + '/blog/'),
+      path:translatePath((lang === defaultLang ? '/' + lang : '') + '/blog/'),
     },
     {
       title: t('nav.about'),
@@ -44,7 +45,7 @@ const menuitems = [
   <header class="flex flex-col lg:flex-row justify-between items-center my-5">
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
-        <a href="/" class="text-lg"
+        <a href={`/${lang === defaultLang ? '' : lang}`} class="text-lg"
           ><span class="font-bold text-slate-800">Aboubacar</span><span
             class="text-slate-500"> Barry</span
           >

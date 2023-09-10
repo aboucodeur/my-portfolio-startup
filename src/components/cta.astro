@@ -1,8 +1,10 @@
 ---
 import Link from "./ui/link.astro";
-import { getLangFromUrl, useTranslations } from "i18n/utils";
+import { getLangFromUrl, useTranslations, useTranslatedPath, getRouteFromUrl } from "i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
+const route = getRouteFromUrl(Astro.url); 
+const translatePath = useTranslatedPath(lang)
 const t = useTranslations(lang);
 ---
 
@@ -16,7 +18,7 @@ const t = useTranslations(lang);
       ferait tout bon developpeur.
   </p>
   <div class="flex mt-5">
-    <Link href="/contact" class="rounded-full" style="inverted">
+    <Link href={translatePath(`/${route ? route : ''}`,lang)}} class="rounded-full" style="inverted">
       {t('common.cta.button')} !
     </Link>
   </div>

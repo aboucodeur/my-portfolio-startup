@@ -1,0 +1,43 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const iconColorClasses = {
+  react: 'text-blue-500',
+  nodejs: 'text-green-500',
+  express: 'text-gray-500',
+  postgresql: 'text-blue-800',
+  php : 'text-violet-900',
+  python: 'text-yellow-500',
+  linux: 'text-gray-800',
+  git: 'text-red-500',
+  astro: 'text-purple-500',
+  vercel: 'text-black', // Par exemple, couleur noire
+};
+
+const icons = [
+  { name: 'simple-icons:react', color: iconColorClasses.react },
+  { name: 'simple-icons:nodejs', color: iconColorClasses.nodejs },
+  { name: 'simple-icons:express', color: iconColorClasses.express },
+  { name: 'simple-icons:postgresql', color: iconColorClasses.postgresql },
+  { name: 'simple-icons:php', color: iconColorClasses.php },
+  { name: 'simple-icons:python', color: iconColorClasses.python },
+  { name: 'simple-icons:linux', color: iconColorClasses.linux },
+  { name: 'simple-icons:git', color: iconColorClasses.git },
+  { name: 'simple-icons:astro', color: iconColorClasses.astro },
+  { name: 'simple-icons:vercel', color: iconColorClasses.vercel },
+];
+---
+
+<div class="mt-24">
+  <h2 class="text-center text-slate-500">{t('common.motivation')}</h2>
+  <div class="flex gap-8 md:gap-20 items-center justify-center mt-10 flex-wrap">
+      {icons.map((icon)=> (
+        <Icon class={"h-8 md:h-12 " + icon.color} name={icon.name} />
+      ))}
+  </div>
+</div>

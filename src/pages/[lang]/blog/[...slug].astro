@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import { getLangFromUrl, useTranslations,useTranslatedPath } from "i18n/utils";
+
+const lng = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lng);
+const t = useTranslations(lng);
+
+// Astro va utiliser comme params via la valeurs retourner
+export async function getStaticPaths() {
+    const pages = await getCollection('blog')
+
+    const paths = pages.map(page => {
+        const [lang, ...slug] = page.slug.split('/');
+        return { params: { lang, slug: slug.join('/') || undefined }, props: page }
+    })
+
+    return paths;
+}
+
+// const formattedDate = page.data.date.toLocaleString(lang);
+const { lang, slug } = Astro.params;
+const page = Astro.props;
+
+const { Content } = await page.render();
+---
+
+<Layout title={page.data.title}>
+    <Container>
+        <div class="mx-auto max-w-3xl mt-14">
+            <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
+            {page.data.category}
+            </span>
+            <h1
+            class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight">
+            {page.data.title}
+            </h1>
+            <div class="flex gap-2 mt-3 items-center flex-wrap md:flex-nowrap">
+            <span class="text-gray-400">
+                {page.data.author}
+            </span>
+            <span class="text-gray-400">•</span>
+            <time
+                class="text-gray-400"
+                datetime={page.data.publishDate.toISOString()}>
+                {page.data.publishDate.toDateString()}
+            </time>
+            <span class="text-gray-400 hidden md:block">•</span>
+            <div class="w-full md:w-auto flex flex-wrap gap-3">
+                {
+                page.data.tags.map((tag) => (
+                    <span class="text-sm text-gray-500">#{tag}</span>
+                ))
+                }
+            </div>
+            </div>
+        </div>
+
+        <div class="mx-auto prose prose-lg mt-6 max-w-3xl">
+            <Content />
+        </div>
+        <div class="text-center mt-8">
+            <a
+            href={`/${lang}/blog`}
+            class="bg-gray-100 px-5 py-3 rounded-md hover:bg-gray-200 transition"
+            >← {t('common.blog.back_button')}</a
+            >
+        </div>
+    </Container>
+</Layout>

@@ -1,0 +1,92 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon";
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const featuresI18n = {
+    fr : [
+          {
+              title: "Développement fullstack Web & Mobile",
+              description: "je developpe des applications web & mobile avec le frontend react js",
+              icon: "bx:bxs-mobile",
+          },
+          {
+              title: "Frontend avec React",
+              description: "La plus part des entreprises veut un avoir un production ready de leurs site web avec la nouvelle technologie react js developper par facebook.",
+              icon: "bx:bxl-react",
+          },
+          {
+              title: "Backend API REST (Entreprise)",
+              description: "Derrière chaque application se cachent des API (Interfaces de Programmation d'Applications) essentielles. J'utilise node js (express js) et php selon le contexte",
+              icon: "bx:bxs-server",
+          },
+          {
+              title: "DevOps Simplifié",
+              description: "Après avoir créé une application incroyable, l'étape suivante peut être délicate : la mettre à la disposition de vos utilisateurs. Les serveurs de production, les stores d'applications et les environnements sans serveur peuvent sembler intimidants.",
+              icon: "bx:bxs-user-check",
+          },
+          {
+              title: "Base de donnee (POSTGRESQL)",
+              description: "Les fondations d'une application solide commencent par la gestion de données efficace. Avec PostgreSQL, nous créons une base de données robuste qui sécurise et protège les informations vitales de vos utilisateurs. Votre application repose sur un socle solide pour offrir une expérience fiable et sécurisée.",
+              icon: "bx:bxs-user-check",
+          },
+      ],
+  en : [
+        {
+            title: "Fullstack Web & Mobile Development",
+            description: "I develop web and mobile applications with the React.js frontend.",
+            icon: "bx:bxs-mobile",
+        },
+        {
+            title: "Frontend with React",
+            description: "Most companies aim to have a production-ready website using the latest technology, React.js, developed by Facebook.",
+            icon: "bx:bxl-react",
+        },
+        {
+            title: "Enterprise Backend API",
+            description: "Behind every application are essential APIs (Application Programming Interfaces). I use Node.js (Express.js) and PHP depending on the context.",
+            icon: "bx:bxs-server",
+        },
+        {
+            title: "Simplified DevOps",
+            description: "After creating an amazing application, the next step can be tricky: making it available to your users. Production servers, app stores, and serverless environments may seem intimidating.",
+            icon: "bx:bxs-user-check",
+        },
+        {
+            title: "Database (POSTGRESQL)",
+            description: "The foundation of a strong application starts with efficient data management. With PostgreSQL, we build a robust database that secures and protects vital user information. Your application relies on a solid base to deliver a reliable and secure experience.",
+            icon: "bx:bxs-user-check",
+        },
+    ]
+}
+---
+
+<div class="mt-16 md:mt-0 lg:mt-3">
+  <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
+    {t('common.skills_plural')}
+  </h2>
+  <p class="text-lg mt-4 text-slate-600">
+    {t('common.skills_description')}
+    <!-- Astro comes batteries included. It takes the best parts of state-of-the-art
+    tools and adds its own innovations. -->
+  </p>
+</div>
+
+<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-10 gap-5">
+  {
+    featuresI18n[lang].map((item) => (
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-blue-500 rounded-full  p-2 w-8 h-8 shrink-0">
+          <Icon class="text-white" name={item.icon} />
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+        </div>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,45 @@
+---
+import Contactform from "@components/contactform.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon";
+---
+
+<Layout title="Contact">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Contact</Fragment>
+      <Fragment slot="desc">
+        Vos collaborations et suggestions sont la bienvenue !
+      </Fragment>
+    </Sectionhead>
+
+    <div class="grid md:grid-cols-2 gap-10 mx-auto max-w-4xl mt-12">
+      <div>
+        <Contactform />
+      </div>
+      <div>
+        <h2 class="font-medium text-2xl text-gray-800">Contacter Aboubacar Barry</h2>
+        <p class="text-lg leading-relaxed text-slate-500 mt-3">
+          Aujourd'hui, la présence en ligne est cruciale pour les PME, les entreprises et les particuliers afin d'étendre leur portée. Je suis là pour vous guider dans cette démarche et vous aider à réussir sur internet.
+        </p>
+        <div class="mt-5">
+          <div class="flex items-center mt-2 space-x-2 text-gray-600">
+            <Icon class="text-gray-400 w-4 h-4" name="uil:map-marker" />
+            <span>Hamdallaye ACI 2000</span>
+          </div><div class="flex items-center mt-2 space-x-2 text-gray-600">
+            <Icon class="text-gray-400 w-4 h-4" name="uil:envelope" /><a
+              href="mailto:hello@astroshipstarter.com"
+              >codeurabou123@gmail.com</a
+            >
+          </div><div class="flex items-center mt-2 space-x-2 text-gray-600">
+            <Icon class="text-gray-400 w-4 h-4" name="uil:phone" /><a
+              href="tel:+1 (987) 4587 899">+223 94 85 58 79</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</Layout>

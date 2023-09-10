@@ -1,0 +1,107 @@
+---
+import { getLangFromUrl, useTranslations } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Projects {
+    img : string,
+    title : string,
+    description : string,
+    author : string,
+    url : string
+}
+
+const projectsI18n = {
+    fr : [
+        {
+            img : 'https://www.ultra-glk.com/logo512.png',
+            title : 'Yeye',
+            description : 'Application web de gestion commerciale',
+            author : 'Aboucodeur ~ JAN 2021',
+            url : 'https://www.ultra-glk.com'
+        },
+        {
+            img : 'https://images.unsplash.com/photo-1555949963-aa79dcee981c',
+            title : 'Numtra',
+            description : 'Projet open source pour traduire les chiffres en lettres',
+            author : 'Aboucodeur ~ DEC 2022',
+            url : 'https://github.com/aboucodeur/numtra'
+        },
+        {
+            img : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3',
+            title : 'Deveco : Dev Economy',
+            description : 'Projet open source pour les developpeur pour gerer leur economies avec PHP',
+            author : 'Aboucodeur ~ JAN 2023',
+            url : 'https://github.com/aboucodeur/Deveco'
+            
+        },
+        {
+            img : 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
+            title : 'React production sh script',
+            description : 'Un script react pour deployer vos applications react rapidement',
+            author : 'Aboucodeur ~ JAN 2022',
+            url : '#'
+            
+        }
+    ],
+    en : [
+        {
+            img: 'https://www.ultra-glk.com/logo512.png',
+            title: 'Yeye',
+            description: 'Web application for business management',
+            author: 'Aboucodeur ~ JAN 2021',
+            url: 'https://www.ultra-glk.com'
+        },
+        {
+            img: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c',
+            title: 'Numtra',
+            description: 'Open-source project to translate numbers into words',
+            author: 'Aboucodeur ~ DEC 2022',
+            url: 'https://github.com/aboucodeur/numtra'
+        },
+        {
+            img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3',
+            title: 'Deveco: Dev Economy',
+            description: 'Open-source project for developers to manage their economy with PHP',
+            author: 'Aboucodeur ~ JAN 2023',
+            url: 'https://github.com/aboucodeur/Deveco'
+        },
+        {
+            img: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
+            title: 'React Production Sh Script',
+            description: 'A React script to deploy your React applications quickly',
+            author: 'Aboucodeur ~ JAN 2022',
+            url: '#'
+        }
+    ],
+}
+
+---
+
+<div class="mt-5 md:mt-0">
+    <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
+        {t('common.projects_plural')}
+    </h2>
+</div>
+
+<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-10 gap-3">
+    {
+        projectsI18n[lang].map((item) => (
+            <div class="border border-gray-300 rounded-lg overflow-hidden shadow-md transition-transform hover:scale-105 focus-within:ring focus-within:ring-opacity-50">
+                <div class="h-40">
+                    <img src={item.img} alt={item.title} class="w-full h-full sm:object-cover lg:object-cover" />
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="text-lg font-semibold mb-2">
+                        <a href={item.url} target="_blank" class="text-blue-500 hover:underline focus:underline">{item.title}</a>
+                    </h3>
+                    <p class="text-gray-700">
+                        {item.description}
+                    </p>
+                    <small class="mt-auto text-gray-500">{item.author}</small>
+                </div>
+            </div>
+        ))
+    }
+</div>

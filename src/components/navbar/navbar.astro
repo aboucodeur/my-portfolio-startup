@@ -1,0 +1,88 @@
+---
+import Container from "@components/container.astro";
+import Link from "@components/ui/link.astro";
+import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import { getLangFromUrl , useTranslations, useTranslatedPath } from '../../i18n/utils'
+import LanguagePicker from "@components/languagePicker.astro";
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
+
+const menuitems = [
+  // {
+  //   title: "Applications",
+  //   path: "/apps",
+  //   children: [
+  //     // { title: "Action", path: "/" },
+  //     // { title: "Another action", path: "#" },
+  //     // { title: "Dropdown Submenu", path: "#" },
+  //     // { title: "404 Page", path: "/404" },
+  //   ],
+  // },
+    {
+      title: t('nav.app_news'),
+      path:translatePath('/' + lang + '/blog/'),
+    },
+    {
+      title: t('nav.about'),
+      path: translatePath('/apropos/'),
+    },
+    {
+      title: t('nav.contact'),
+      path: translatePath('/contact/'),
+    },
+    {
+      title: t('nav.pricing'),
+      path: translatePath('/prix/'),
+    },
+
+];
+---
+
+<Container>
+  <header class="flex flex-col lg:flex-row justify-between items-center my-5">
+    <Astronav>
+      <div class="flex w-full lg:w-auto items-center justify-between">
+        <a href="/" class="text-lg"
+          ><span class="font-bold text-slate-800">Aboubacar</span><span
+            class="text-slate-500"> Barry</span
+          >
+        </a>
+        <LanguagePicker />
+        <div class="block lg:hidden">
+          <MenuIcon class="w-8 h-full text-gray-800" />
+        </div>
+      </div>
+      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
+        <ul class="flex flex-col lg:flex-row lg:gap-3">
+          <!-- // {item.children && (
+          //   <Dropdown
+          //     title={item.title}
+          //     children={item.children}
+          //     lastItem={index === menuitems.length - 1}
+          //   />
+          // )} -->
+          {menuitems.map((item, index) => (
+              <>
+                  <li>
+                    <a
+                      href={item.path}
+                      class={item.path === Astro.url.pathname ? "flex lg:px-3 py-2 text-blue-600 hover:text-gray-900" : "flex lg:px-3 py-2 text-gray-600 hover:text-gray-900"}
+                      >
+                      {item.title}
+                    </a>
+                  </li>
+              </>
+            ))
+          }
+        </ul>
+      </MenuItems>
+    </Astronav>
+    <div>
+      <div class="hidden lg:flex items-center gap-4">
+        <Link class="rounded-full"  href={translatePath('/' + lang + '/blog/')} size="md">{t('nav.cta')}</Link>
+      </div>
+    </div>
+  </header>
+</Container>

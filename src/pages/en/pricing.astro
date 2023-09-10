@@ -1,0 +1,71 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import PricingCard from "@components/pricing.astro";
+
+const pricing = [
+  {
+    name: "Trial",
+    custom : "$0",
+    price: "Free",
+    popular: false,
+    features: [
+      "One-week free subscription to test",
+      "Unlimited users",
+      "All features included",
+    ],
+    button: {
+      text: "Contact",
+      link: "/contact",
+    },
+  },
+  {
+    name: "Startup",
+    custom : "$200,000 XOF",
+    price: "$307 / year",
+    popular: true,
+    features: [
+      "Free annual subscription for SMEs and individuals",
+      "Unlimited users",
+      "All features included",
+    ],
+    button: {
+      text: "Get Started",
+      link: "/contact",
+    },
+  },
+  {
+    name: "Enterprise",
+    custom : "$300,000 XOF",
+    price: "$461 / year",
+    popular: false,
+    features: [
+      "Free annual subscription for SMEs and individuals",
+      "Unlimited users",
+      "All features included",
+      "Assistance, regular maintenance",
+    ],
+    button: {
+      text: "Contact",
+      link: "/contact",
+    },
+  },
+];
+---
+
+<Layout title="Pricing">
+    <Container>
+        <Sectionhead>
+        <Fragment slot="title">Pricing</Fragment>
+        <Fragment slot="desc">
+            Simple and predictable pricing. No surprises. <br>
+            This pricing applies exclusively to management, CRM, and ERP applications.
+        </Fragment>
+        </Sectionhead>
+
+        <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-screen-lg mt-12">
+        {pricing.map((item) => <PricingCard plan={item} />)}
+        </div>
+    </Container>
+</Layout>

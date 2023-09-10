@@ -1,0 +1,72 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import PricingCard from "@components/pricing.astro";
+
+const pricing = [
+  {
+    name: "Essai",
+    custom : "0 F",
+    price: "Gratuit",
+    popular: false,
+    features: [
+      "Une semaine abonnement offert pour tester",
+      "Nombres illimite d'utilisateur",
+      "Tous les fonctionnalites",
+    ],
+    button: {
+      text: "Contact",
+      link: "/contact",
+    },
+  },
+  {
+    name: "Startup",
+    custom : "200 000 F",
+    price: "$307 / ans",
+    popular: true,
+    features: [
+      "Abonnement annuel offert au PME, Particulier",
+      "Nombres illimite d'utilisateur",
+      "Tous les fonctionnalites",
+    ],
+    button: {
+      text: "Commencer",
+      link: "/contact",
+    },
+  },
+  {
+    name: "Enterprise",
+    custom : "300 000 F",
+    price: "$461 / ans",
+    popular: false,
+    features: [
+      "Abonnement annuel offert au PME, Particulier",
+      "Nombres illimite d'utilisateur",
+      "Tous les fonctionnalites",
+      "Assitance , maintenance regulier"
+    ],
+    button: {
+      text: "Contact",
+      link: "/contact",
+    },
+  },
+];
+---
+
+<Layout title="Prix">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Prix</Fragment>
+      <Fragment slot="desc">
+        <!-- Simple & Predictable pricing. No Surprises. -->
+        Tarification simple et prévisible. Aucune surprise. <br>
+        Ce tarif s'applique exclusivement aux applications de gestion, CRM et ERP.
+      </Fragment>
+    </Sectionhead>
+
+    <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-screen-lg mt-12">
+      {pricing.map((item) => <PricingCard plan={item} />)}
+    </div>
+  </Container>
+</Layout>

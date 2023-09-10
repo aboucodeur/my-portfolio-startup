@@ -1,0 +1,57 @@
+---
+import Icon from "astro-icon";
+import { Picture } from "@astrojs/image/components";
+import Nasa from "assets/nasa.jpg";
+import CodeImg from "assets/code.png";
+import Link from "@components/ui/link.astro";
+import { getLangFromUrl, useTranslations,useTranslatedPath } from "i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang)
+const t = useTranslations(lang);
+---
+
+<main class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24">
+  <div class="py-6 md:order-1 hidden md:block">
+    <Picture
+      src={lang === 'fr' ? Nasa : CodeImg}
+      alt="Astronaut in the air"
+      widths={[200, 400, 600]}
+      aspectRatio="4:2"
+      sizes="(max-width: 800px) 100vw, 620px"
+      loading="eager"
+      format="avif"
+    />
+  </div>
+  <div>
+    <p class="text-orange-500 text-2xl">#{t('hero.slogan')} !</p>
+    <h1
+      class="text-blue-600 text-2xl lg:text-3xl xl:text-4xl font-bold lg:tracking-tight xl:tracking-tighter">
+      {t('hero.title')} !  
+    </h1>
+    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+      {t('hero.description')}
+    </p>
+    <div class="mt-6 flex flex-col sm:flex-row gap-3">
+      <Link
+        href="#"
+        href={translatePath('/' + lang + '/blog/')}
+        class="flex gap-1 items-center justify-center rounded-full"
+>
+        <!-- <Icon class="text-white w-5 h-5" name="bx:bxs-mobile-alt" /> -->
+        <Icon class="text-black w-4 h-4" name="bx:bx-laptop" />
+        {t('nav.cta')}
+      </Link>
+      <Link
+        size="lg"
+        style="outline"
+        rel="noopener"
+        href={translatePath('/contact',lang)}
+        class="flex gap-1 items-center justify-center"
+        >
+        <Icon class="text-black w-4 h-4" name="bx:bxs-contact" />
+        Contact
+      </Link>
+    </div>
+  </div>
+</main>
